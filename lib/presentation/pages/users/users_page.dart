@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:simple_getx_clean_arch/presentation/controllers/users/user_controller.dart';
 import 'package:simple_getx_clean_arch/presentation/pages/posts/widgets/post_list_item.dart';
 
-import '../../../domain/entity/user.dart';
-
 class UsersPage extends StatelessWidget {
-  final List<User> users = User.mockUsers();
+  final controller = UserController()..loadUsers();
 
   UsersPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final uiState = controller.uiState.value;
     return ListView.builder(
-      itemCount: users.length,
+      itemCount: uiState.users.length,
       itemBuilder: (context, position) {
-        final user = users[position];
+        final user = uiState.users[position];
         return ListTile(
           leading: Container(
             padding: const EdgeInsets.all(8.0),

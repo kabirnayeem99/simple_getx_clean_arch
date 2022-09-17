@@ -76,6 +76,6 @@ class User {
   }
 
   static List<User> mockUsers() {
-    return List.generate(20, (index) => mockUser());
+    return List.generate(10, (index) => mockUser());
   }
 }
