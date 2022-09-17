@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -12,13 +13,13 @@ class HomePage extends StatelessWidget {
   static const List<BottomNavigationBarItem> _bottomNavBarItems = [
     BottomNavigationBarItem(
       icon: Icon(
-        Icons.newspaper_rounded,
+        CupertinoIcons.news,
       ),
       label: "Posts",
     ),
     BottomNavigationBarItem(
       icon: Icon(
-        Icons.supervised_user_circle_rounded,
+        CupertinoIcons.person_crop_circle,
       ),
       label: "Users",
     )
@@ -33,9 +34,11 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx(
       () => Scaffold(
-        appBar: AppBar(title: const Text("{JSON}Placeholder")),
         bottomNavigationBar: BottomNavigationBar(
           onTap: (position) => currentPage.value = position,
+          elevation: 0.0,
+          selectedFontSize: 14.0,
+          unselectedFontSize: 14.0,
           currentIndex: currentPage.value,
           items: _bottomNavBarItems,
         ),

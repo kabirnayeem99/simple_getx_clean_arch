@@ -1,4 +1,4 @@
-import '../../domain/entity/user.dart';
+import '../../../domain/entity/user.dart';
 
 class UsersUiState {
   bool isLoading;
