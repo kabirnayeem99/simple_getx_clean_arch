@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svprogresshud/flutter_svprogresshud.dart';
 import 'package:get/get.dart';
+import 'package:unicons/unicons.dart';
 
 import '../../controllers/users/user_controller.dart';
 import 'widgets/user_grid_item.dart';
@@ -20,6 +21,17 @@ class UsersPage extends StatelessWidget {
         uiState.isLoading ? SVProgressHUD.show() : SVProgressHUD.dismiss();
 
         return Scaffold(
+          floatingActionButton: FloatingActionButton.small(
+            onPressed: () => userListController.animateTo(
+              0,
+              duration: 600.milliseconds,
+              curve: Curves.easeInCirc,
+            ),
+            child: const Icon(
+              UniconsLine.angle_up,
+              color: Colors.white,
+            ),
+          ),
           body: GridView.builder(
             physics: const AlwaysScrollableScrollPhysics(),
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
