@@ -19,10 +19,10 @@ class PlaceHolderApp extends StatelessWidget {
   Widget build(BuildContext context) {
     SVProgressHUD.setRingThickness(3.5);
     SVProgressHUD.setForegroundColor(Get.theme.primaryColor);
+
     return GetMaterialApp(
       theme: ThemeData(
-        primarySwatch: Colors.teal,
-        fontFamily: GoogleFonts.ubuntu().fontFamily,
+        fontFamily: GoogleFonts.nanumGothic().fontFamily,
       ),
       home: HomePage(),
     );

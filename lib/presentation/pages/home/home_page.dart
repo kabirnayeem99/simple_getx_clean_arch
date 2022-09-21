@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:unicons/unicons.dart';
 
 import '../posts/posts_page.dart';
 import '../users/users_page.dart';
@@ -12,15 +13,11 @@ class HomePage extends StatelessWidget {
 
   static const List<BottomNavigationBarItem> _bottomNavBarItems = [
     BottomNavigationBarItem(
-      icon: Icon(
-        CupertinoIcons.news,
-      ),
+      icon: Icon(UniconsLine.newspaper),
       label: "Posts",
     ),
     BottomNavigationBarItem(
-      icon: Icon(
-        CupertinoIcons.person_crop_circle,
-      ),
+      icon: Icon(UniconsLine.users_alt),
       label: "Users",
     )
   ];
@@ -43,7 +40,7 @@ class HomePage extends StatelessWidget {
           items: _bottomNavBarItems,
         ),
         body: AnimatedContainer(
-          duration: const Duration(milliseconds: 600),
+          duration: 600.milliseconds,
           child: screens[currentPage.value],
         ),
       ),

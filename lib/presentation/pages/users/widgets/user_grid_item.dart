@@ -9,9 +9,8 @@ import 'user_top_post_bottom_sheet.dart';
 
 class UserGridItem extends StatelessWidget {
   final User user;
-  final UserController controller = Get.find();
 
-  UserGridItem({Key? key, required this.user}) : super(key: key);
+  const UserGridItem({Key? key, required this.user}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -124,7 +123,8 @@ class UserGridItem extends StatelessWidget {
             Align(
               alignment: Alignment.bottomRight,
               child: GestureDetector(
-                onTap: () async => controller.followUser(user.id),
+                onTap: () async =>
+                    Get.find<UserController>().followUser(user.id),
                 child: Padding(
                   padding: const EdgeInsets.only(bottom: 22.0, right: 12.0),
                   child: Icon(
@@ -132,7 +132,9 @@ class UserGridItem extends StatelessWidget {
                         ? CupertinoIcons.person_crop_circle_fill_badge_checkmark
                         : CupertinoIcons.person_add,
                     size: 28.0,
-                    color: user.isFollowing ? Colors.greenAccent : Colors.white,
+                    color: user.isFollowing
+                        ? Get.theme.primaryColorLight
+                        : Colors.white,
                   ),
                 ),
               ),

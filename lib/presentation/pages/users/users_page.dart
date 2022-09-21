@@ -13,14 +13,11 @@ class UsersPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetX<UserController>(
-      init: UserController()..loadUsers(),
+      init: Get.find<UserController>(),
       builder: (controller) {
         final uiState = controller.uiState.value;
-        if (uiState.isLoading) {
-          SVProgressHUD.show();
-        } else {
-          SVProgressHUD.dismiss();
-        }
+
+        uiState.isLoading ? SVProgressHUD.show() : SVProgressHUD.dismiss();
 
         return Scaffold(
           body: GridView.builder(

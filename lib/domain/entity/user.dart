@@ -1,6 +1,3 @@
-import 'dart:math';
-
-import 'package:faker_dart/faker_dart.dart';
 import 'package:simple_getx_clean_arch/domain/entity/post.dart';
 
 class User {
@@ -10,21 +7,6 @@ class User {
   List<Post> topPosts;
   bool isFollowing;
   String imageUrl;
-
-  static User mockUser() {
-    return User(
-      id: Random().nextInt(1000) + DateTime.now().millisecond,
-      name: Faker.instance.name.fullName(gender: Gender.male),
-      username: Faker.instance.name.firstName().toLowerCase(),
-      topPosts: Post.mockPosts().take(Random().nextInt(5)).toList(),
-      isFollowing: Random().nextBool(),
-      imageUrl: Faker.instance.image.unsplash.people(),
-    );
-  }
-
-  static List<User> mockUsers() {
-    return List.generate(10, (index) => mockUser());
-  }
 
   User({
     required this.id,

@@ -17,6 +17,7 @@ class PostController extends GetxController {
   }
 
   Future<void> loadPosts({int page = 1}) async {
+    _loading();
     final posts = await _postsRepository.getAllPosts();
 
     final existingPosts = uiState.value.posts.toList(growable: true);
@@ -24,7 +25,26 @@ class PostController extends GetxController {
 
     uiState.update((state) {
       state?.posts = existingPosts;
-      state?.isLoading = false;
     });
+
+    _unloading();
   }
+
+  Future<void> likePost(int postId) async {
+    _loading();
+    var existingPosts = uiState.value.posts
+        .map((post) =>
+            post.id == postId ? post.copyWith(isLiked: !post.isLiked) : post)
+        .toList();
+
+    uiState.update((state) {
+      state?.posts = existingPosts;
+    });
+
+    _unloading();
+  }
+
+  void _loading() => uiState.update((state) => state?.isLoading = true);
+
+  void _unloading() => uiState.update((state) => state?.isLoading = false);
 }

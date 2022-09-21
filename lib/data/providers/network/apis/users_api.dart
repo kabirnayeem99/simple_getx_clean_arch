@@ -2,13 +2,13 @@ import '../api_endpoint.dart';
 import '../api_provider.dart';
 import '../api_request_representable.dart';
 
-class PostsApi extends APIRequestRepresentable {
+class UsersApi extends APIRequestRepresentable {
   @override
   get body => null;
 
-  PostsApi._();
+  UsersApi._();
 
-  PostsApi.getPosts() : this._();
+  UsersApi.getAllUsers() : this._();
 
   @override
   String get endpoint => APIEndpoint.placeholderApi;
@@ -17,7 +17,7 @@ class PostsApi extends APIRequestRepresentable {
   HTTPMethod get method => HTTPMethod.get;
 
   @override
-  String get path => "/posts";
+  String get path => "/users";
 
   @override
   Map<String, String>? get query => {};

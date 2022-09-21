@@ -26,7 +26,7 @@ class APIProvider {
     } on TimeoutException catch (_) {
       throw TimeOutException(null);
     } on SocketException {
-      throw FetchDataException('No Internet connection');
+      throw FetchDataException("No Internet connection");
     }
   }
 

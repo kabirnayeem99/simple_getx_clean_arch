@@ -1,18 +1,22 @@
-import 'dart:math';
-
 class Post {
   int id;
   String title;
   String body;
   String thumbnail;
   PostType type;
+  int likeCount;
+  int commentCount;
+  bool isLiked;
 
   Post({
     required this.id,
     required this.title,
     required this.body,
-    required this.type,
     required this.thumbnail,
+    required this.type,
+    required this.likeCount,
+    required this.commentCount,
+    required this.isLiked,
   });
 
   @override
@@ -23,35 +27,53 @@ class Post {
           id == other.id &&
           title == other.title &&
           body == other.body &&
+          thumbnail == other.thumbnail &&
           type == other.type &&
-          thumbnail == other.thumbnail);
+          likeCount == other.likeCount &&
+          commentCount == other.commentCount &&
+          isLiked == other.isLiked);
 
   @override
   int get hashCode =>
       id.hashCode ^
       title.hashCode ^
       body.hashCode ^
+      thumbnail.hashCode ^
       type.hashCode ^
-      thumbnail.hashCode;
+      likeCount.hashCode ^
+      commentCount.hashCode ^
+      isLiked.hashCode;
 
   @override
   String toString() {
-    return 'Post{ id: $id, title: $title, body: $body, type: $type, thumbnail: $thumbnail}';
+    return 'Post{ id: $id, title: $title, body: $body, thumbnail: $thumbnail, '
+        'type: $type, likeCount: $likeCount, commentCount: $commentCount, '
+        'isLiked: $isLiked,}';
+  }
+
+  String toUserFriendlyString() {
+    return "Check out this post - $title, ${type == PostType.text ? body : thumbnail}";
   }
 
   Post copyWith({
     int? id,
     String? title,
     String? body,
-    PostType? type,
     String? thumbnail,
+    PostType? type,
+    int? likeCount,
+    int? commentCount,
+    bool? isLiked,
   }) {
     return Post(
       id: id ?? this.id,
       title: title ?? this.title,
       body: body ?? this.body,
-      type: type ?? this.type,
       thumbnail: thumbnail ?? this.thumbnail,
+      type: type ?? this.type,
+      likeCount: likeCount ?? this.likeCount,
+      commentCount: commentCount ?? this.commentCount,
+      isLiked: isLiked ?? this.isLiked,
     );
   }
 
@@ -60,8 +82,11 @@ class Post {
       'id': id,
       'title': title,
       'body': body,
-      'type': type,
       'thumbnail': thumbnail,
+      'type': type,
+      'likeCount': likeCount,
+      'commentCount': commentCount,
+      'isLiked': isLiked,
     };
   }
 
@@ -70,32 +95,11 @@ class Post {
       id: map['id'] as int,
       title: map['title'] as String,
       body: map['body'] as String,
-      type: map['type'] as PostType,
       thumbnail: map['thumbnail'] as String,
-    );
-  }
-
-  static List<Post> mockPosts() {
-    return List.generate(10, (index) => mockPost());
-  }
-
-  static Post mockPost() {
-    bool isText = Random().nextBool();
-    PostType type = isText ? PostType.text : PostType.image;
-    int id = Random().nextInt(1000);
-    String title = "Title";
-    String body = isText
-        ? "Random text. Random text. Random text. Random text. Random text. "
-        : "";
-    String thumbnail = isText
-        ? ""
-        : "https://1.bp.blogspot.com/_6A8j2EQmANk/TIYKEoNKAwI/AAAAAAAAMXQ/NlGPm2xoadc/s400/natural+beauty+in+green+color8.jpg";
-    return Post(
-      id: id,
-      title: title,
-      body: body,
-      thumbnail: thumbnail,
-      type: type,
+      type: map['type'] as PostType,
+      likeCount: map['likeCount'] as int,
+      commentCount: map['commentCount'] as int,
+      isLiked: map['isLiked'] as bool,
     );
   }
 }

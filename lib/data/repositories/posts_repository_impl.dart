@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:simple_getx_clean_arch/data/datasources/remote_posts_data_source.dart';
 import 'package:simple_getx_clean_arch/domain/entity/post.dart';
 import 'package:simple_getx_clean_arch/domain/repositories/posts_repository.dart';
@@ -17,6 +19,9 @@ class PostRepositoryImpl extends PostsRepository {
               body: dtoItem.body ?? "",
               type: PostType.text,
               thumbnail: "",
+              likeCount: Random().nextInt(459),
+              commentCount: Random().nextInt(134),
+              isLiked: Random().nextBool(),
             ))
         .toList();
     return posts;
