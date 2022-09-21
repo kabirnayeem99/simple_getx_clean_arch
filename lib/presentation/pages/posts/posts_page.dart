@@ -1,22 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svprogresshud/flutter_svprogresshud.dart';
+import 'package:get/get.dart';
 
 import '../../controllers/posts/post_controller.dart';
 import 'widgets/post_list_item.dart';
 
 class PostsPage extends StatelessWidget {
-  PostsPage({Key? key}) : super(key: key);
-
-  final postController = PostController()..loadPosts();
+  const PostsPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final uiState = postController.uiState.value;
-    return uiState.isLoading
-        ? const Center(child: CircularProgressIndicator())
-        : ListView.builder(
+    return GetX(
+        init: Get.find<PostController>(),
+        builder: (controller) {
+          final uiState = controller.uiState.value;
+
+          if (uiState.isLoading) {
+            SVProgressHUD.show();
+          } else {
+            SVProgressHUD.dismiss(delay: 600.milliseconds);
+          }
+
+          return ListView.builder(
             itemCount: uiState.posts.length,
-            itemBuilder: (context, position) =>
-                PostListItem(post: uiState.posts[position]),
+            itemBuilder: (context, position) => PostListItem(
+              post: uiState.posts[position],
+            ),
           );
+        });
   }
 }

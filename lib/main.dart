@@ -3,9 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svprogresshud/flutter_svprogresshud.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:simple_getx_clean_arch/core/servicelocator/service_locator.dart';
 import 'package:simple_getx_clean_arch/presentation/pages/home/home_page.dart';
 
-void main() {
+void main() async {
+  ServiceLocator.init();
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const PlaceHolderApp());
 }
 
