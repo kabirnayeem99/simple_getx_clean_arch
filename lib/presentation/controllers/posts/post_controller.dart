@@ -32,9 +32,31 @@ class PostController extends GetxController {
 
   Future<void> likePost(int postId) async {
     _loading();
+    await _postsRepository.toggleLikeOfPost(postId);
     var existingPosts = uiState.value.posts
         .map((post) =>
             post.id == postId ? post.copyWith(isLiked: !post.isLiked) : post)
+        .toList();
+
+    uiState.update((state) {
+      state?.posts = existingPosts;
+    });
+
+    _unloading();
+  }
+
+  Future<void> likePostComment(int postId, int commentId) async {
+    _loading();
+    await _postsRepository.toggleLikeOfPostComment(postId, commentId);
+    var existingPosts = uiState.value.posts
+        .map((post) => post.id == postId
+            ? post.copyWith(
+                comments: post.comments
+                    .map((comment) => comment.id == commentId
+                        ? comment.copyWith(isLiked: !comment.isLiked)
+                        : comment)
+                    .toList())
+            : post)
         .toList();
 
     uiState.update((state) {

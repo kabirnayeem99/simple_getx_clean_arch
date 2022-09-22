@@ -25,21 +25,22 @@ class UserGridItem extends StatelessWidget {
           children: [
             Align(
               alignment: Alignment.center,
-              child: CachedNetworkImage(
-                imageUrl: user.imageUrl,
-                width: 375.0,
-                height: 500.0,
-                fit: BoxFit.cover,
-                progressIndicatorBuilder: (context, url, downloadProgress) =>
-                    Center(
-                  child: CircularProgressIndicator(
-                    value: downloadProgress.progress,
-                    strokeWidth: 3.5,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(24.0),
+                child: CachedNetworkImage(
+                  imageUrl: user.imageUrl,
+                  width: Get.mediaQuery.size.width / 1.5,
+                  height: 500.0,
+                  fit: BoxFit.cover,
+                  progressIndicatorBuilder: (context, url, progress) =>
+                      Container(
+                    height: 500.0,
+                    color: Get.theme.primaryColor.withAlpha(40),
                   ),
-                ),
-                errorWidget: (context, url, error) => Icon(
-                  CupertinoIcons.download_circle_fill,
-                  color: Get.theme.errorColor,
+                  errorWidget: (context, url, error) => Container(
+                    height: 500.0,
+                    color: Get.theme.primaryColor.withAlpha(40),
+                  ),
                 ),
               ),
             ),

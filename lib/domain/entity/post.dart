@@ -1,3 +1,5 @@
+import 'package:simple_getx_clean_arch/domain/entity/comment.dart';
+
 class Post {
   int id;
   String title;
@@ -7,6 +9,7 @@ class Post {
   int likeCount;
   int commentCount;
   bool isLiked;
+  List<Comment> comments;
 
   Post({
     required this.id,
@@ -17,6 +20,7 @@ class Post {
     required this.likeCount,
     required this.commentCount,
     required this.isLiked,
+    required this.comments,
   });
 
   @override
@@ -64,6 +68,7 @@ class Post {
     int? likeCount,
     int? commentCount,
     bool? isLiked,
+    List<Comment>? comments,
   }) {
     return Post(
       id: id ?? this.id,
@@ -74,6 +79,7 @@ class Post {
       likeCount: likeCount ?? this.likeCount,
       commentCount: commentCount ?? this.commentCount,
       isLiked: isLiked ?? this.isLiked,
+      comments: comments ?? this.comments,
     );
   }
 
@@ -100,6 +106,7 @@ class Post {
       likeCount: map['likeCount'] as int,
       commentCount: map['commentCount'] as int,
       isLiked: map['isLiked'] as bool,
+      comments: map['comments'] as List<Comment>,
     );
   }
 }

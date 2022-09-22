@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -37,21 +38,50 @@ class PostListItem extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 12),
-          Container(
-            height: 200,
-            margin: const EdgeInsets.symmetric(horizontal: 12.0),
-            padding: const EdgeInsets.symmetric(horizontal: 6.0),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(24.0),
-              color: Get.theme.primaryColor.withAlpha(40),
-            ),
-            child: Center(
-              child: Text(
-                post.body,
-                textAlign: TextAlign.center,
-              ),
-            ),
-          ),
+          post.type == PostType.text
+              ? Container(
+                  height: 200,
+                  margin: const EdgeInsets.symmetric(horizontal: 12.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 6.0),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(24.0),
+                    color: Get.theme.primaryColor.withAlpha(40),
+                  ),
+                  child: Center(
+                    child: Text(
+                      post.body,
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                )
+              : Container(
+                  height: 200,
+                  margin: const EdgeInsets.symmetric(horizontal: 12.0),
+                  width: Get.mediaQuery.size.width,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(24.0),
+                    child: Container(
+                      color: Get.theme.primaryColor.withAlpha(40),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(24.0),
+                        child: CachedNetworkImage(
+                          imageUrl: post.thumbnail,
+                          fit: BoxFit.cover,
+                          errorWidget: (context, url, error) {
+                            print(error.toString());
+                            return Container(
+                              color: Get.theme.primaryColor.withAlpha(40),
+                            );
+                          },
+                          progressIndicatorBuilder: (context, url, progress) =>
+                              Container(
+                            color: Get.theme.primaryColor.withAlpha(40),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
           const SizedBox(height: 12),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 14.0),

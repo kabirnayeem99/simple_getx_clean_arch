@@ -89,3 +89,15 @@ const darkColorScheme = ColorScheme(
   shadow: Color(0xFF000000),
   surfaceTint: Color(0xFFFFB3B3),
 );
+
+final darkTheme = ThemeData.dark().copyWith(
+  primaryColor: const Color(0xFFffd9d9),
+  colorScheme: darkColorScheme,
+  useMaterial3: true,
+);
+
+final lightTheme = ThemeData.light().copyWith(
+  primaryColor: const Color(0xFFff5b5b),
+  colorScheme: lightColorScheme,
+  useMaterial3: true,
+);
