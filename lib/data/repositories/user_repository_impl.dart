@@ -1,9 +1,9 @@
 import 'dart:math';
 
-import 'package:simple_getx_clean_arch/data/datasources/mock_image_data_source.dart';
-import 'package:simple_getx_clean_arch/data/datasources/remote_user_data_source.dart';
-import 'package:simple_getx_clean_arch/domain/entity/user.dart';
-import 'package:simple_getx_clean_arch/domain/repositories/user_repository.dart';
+import '../../domain/entity/user.dart';
+import '../../domain/repositories/user_repository.dart';
+import '../datasources/mock_image_data_source.dart';
+import '../datasources/remote_user_data_source.dart';
 
 class UserRepositoryImpl extends UserRepository {
   final RemoteUserDataSource _remoteUserDataSource;
