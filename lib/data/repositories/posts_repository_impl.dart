@@ -2,12 +2,12 @@ import 'dart:math';
 
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
-import 'package:simple_getx_clean_arch/data/dto/photo_item_dto.dart';
 
 import '../../domain/entity/post.dart';
 import '../../domain/repositories/posts_repository.dart';
 import '../datasources/local_posts_data_source.dart';
 import '../datasources/remote_posts_data_source.dart';
+import '../dto/photo_item_dto.dart';
 import '../dto/post_db_dto.dart';
 import '../dto/post_item_dto.dart';
 
