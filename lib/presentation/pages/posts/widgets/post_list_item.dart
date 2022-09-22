@@ -91,18 +91,8 @@ class PostListItem extends StatelessWidget {
                 Row(
                   children: [
                     GestureDetector(
-                      onTap: () async {
-                        Get.find<PostController>().likePost(post.id);
-                        Get.snackbar(
-                          "Success",
-                          "You have ${post.isLiked ? "unliked" : "liked"} ${post.title}...",
-                          borderRadius: 24.0,
-                          barBlur: 0,
-                          borderWidth: 0.8,
-                          borderColor: Get.theme.primaryColor.withAlpha(80),
-                          backgroundColor: Get.theme.cardColor,
-                        );
-                      },
+                      onTap: () async =>
+                          Get.find<PostController>().likePost(post.id),
                       child: Icon(
                         UniconsLine.thumbs_up,
                         color: post.isLiked

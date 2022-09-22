@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:path/path.dart';
 import 'package:simple_getx_clean_arch/data/dto/post_db_dto.dart';
 import 'package:sqflite/sqflite.dart';
@@ -37,12 +38,11 @@ class LocalDatabaseService {
 
   Future<void> savePost(PostDbDto post) async {
     final database = await instance.database;
-    final id = await database.insert(
+    await database.insert(
       tablePosts,
       post.toMap(),
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
-    print("Post saved -> $id");
   }
 
   Future<PostDbDto> getPost(int id) async {
@@ -63,8 +63,16 @@ class LocalDatabaseService {
 
   Future<List<PostDbDto>> getAllPosts() async {
     final database = await instance.database;
-    final resultMaps = await database.query(tablePosts);
+    final List<Map<String, Object?>> resultMaps =
+        await database.query(tablePosts);
 
+    final postDbDtoList = await compute(_parsePostDbDtoList, resultMaps);
+    return postDbDtoList;
+  }
+
+  Future<List<PostDbDto>> _parsePostDbDtoList(
+    List<Map<String, Object?>> resultMaps,
+  ) async {
     return resultMaps.map((map) => PostDbDto.fromMap(map)).toList();
   }
 

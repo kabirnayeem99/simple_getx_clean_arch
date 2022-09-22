@@ -1,3 +1,8 @@
+import 'dart:math';
+
+import 'package:simple_getx_clean_arch/data/datasources/mock_image_data_source.dart';
+import 'package:simple_getx_clean_arch/domain/entity/post.dart';
+
 class PhotoItemDto {
   int? albumId;
   int? id;
@@ -24,5 +29,20 @@ class PhotoItemDto {
     data['url'] = url;
     data['thumbnailUrl'] = thumbnailUrl;
     return data;
+  }
+}
+
+extension PhotoItemDtoParsing on PhotoItemDto {
+  Post mapToPost({int index = 0}) {
+    return Post(
+        id: (id ?? 0) + index,
+        title: title ?? "",
+        body: "",
+        thumbnail: MockImageDataSource.mockImage(),
+        type: PostType.image,
+        likeCount: Random().nextInt(53),
+        commentCount: Random().nextInt(12),
+        isLiked: Random().nextBool(),
+        comments: List.empty());
   }
 }

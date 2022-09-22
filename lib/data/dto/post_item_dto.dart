@@ -1,3 +1,7 @@
+import 'dart:math';
+
+import '../../domain/entity/post.dart';
+
 class PostItemDto {
   int? userId;
   int? id;
@@ -78,5 +82,20 @@ class PostItemDto {
       title: map['title'] as String,
       body: map['body'] as String,
     );
+  }
+}
+
+extension PostItemDtoParsing on PostItemDto {
+  Post mapToPost({int index = 0}) {
+    return Post(
+        id: (id ?? 0) + index,
+        title: title ?? "",
+        body: body ?? "",
+        thumbnail: "",
+        type: PostType.text,
+        likeCount: Random().nextInt(53),
+        commentCount: Random().nextInt(12),
+        isLiked: Random().nextBool(),
+        comments: List.empty());
   }
 }

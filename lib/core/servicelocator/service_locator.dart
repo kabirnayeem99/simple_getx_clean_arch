@@ -22,9 +22,9 @@ class ServiceLocator {
     Get.lazyPut<UserRepository>(
       () => UserRepositoryImpl(Get.find<RemoteUserDataSource>()),
     );
-    Get.lazyPut(() => PostController(Get.find<PostsRepository>()));
-    Get.lazyPut(() => UserController(Get.find<UserRepository>()));
     Get.lazyPut(() => LocalDatabaseService());
     Get.lazyPut(() => LocalPostsDataSource(Get.find<LocalDatabaseService>()));
+    Get.lazyPut(() => PostController(Get.find<PostsRepository>()), fenix: true);
+    Get.lazyPut(() => UserController(Get.find<UserRepository>()), fenix: true);
   }
 }

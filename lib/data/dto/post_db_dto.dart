@@ -1,3 +1,7 @@
+import 'dart:math';
+
+import '../../domain/entity/post.dart';
+
 const String tablePosts = "posts";
 
 class PostDbFields {
@@ -57,7 +61,6 @@ class PostDbDto {
       'isLiked': isLiked ? 1 : 0,
       // 'comments': comments,
     };
-    print(map.toString());
     return map;
   }
 
@@ -73,7 +76,6 @@ class PostDbDto {
       map['isLiked'] == 1,
       // map['comments'] as List<Comment>,
     );
-    print(postDto.toString());
     return postDto;
   }
 
@@ -81,5 +83,35 @@ class PostDbDto {
   String toString() {
     return 'PostDbDto{id: $id, title: $title, body: $body, thumbnail: $thumbnail, '
         'type: $type, likeCount: $likeCount, commentCount: $commentCount, isLiked: $isLiked}';
+  }
+}
+
+extension PostDbItemDtoParsing on PostDbDto {
+  Post mapToPost({int index = 0}) {
+    return Post(
+      id: (id ?? 0) + index,
+      title: title,
+      body: body,
+      thumbnail: thumbnail,
+      type: type == "text" ? PostType.text : PostType.image,
+      likeCount: Random().nextInt(53),
+      commentCount: Random().nextInt(12),
+      isLiked: Random().nextBool(),
+      comments: List.empty(),
+    );
+  }
+}
+
+extension PostItemDtoToPostParsing on Post {
+  PostDbDto mapToPostDbDto({int index = 0}) {
+    return PostDbDto(
+        id,
+        title,
+        body,
+        thumbnail,
+        type == PostType.text ? "text" : "image",
+        likeCount,
+        commentCount,
+        isLiked);
   }
 }
