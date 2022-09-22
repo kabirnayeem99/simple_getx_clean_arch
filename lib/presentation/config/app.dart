@@ -12,6 +12,7 @@ class App extends StatelessWidget {
     return GetMaterialApp(
       theme: lightTheme,
       darkTheme: darkTheme,
+      smartManagement: SmartManagement.full,
       home: HomePage(),
     );
   }

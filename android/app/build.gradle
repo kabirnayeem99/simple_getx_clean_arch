@@ -60,6 +60,7 @@ android {
             signingConfig signingConfigs.debug
         }
     }
+    namespace 'io.github.kabirnayeem99.simple_getx_clean_arch'
 }
 
 flutter {
