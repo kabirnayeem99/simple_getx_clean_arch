@@ -6,13 +6,15 @@ class LocalPostsDataSource {
 
   LocalPostsDataSource(this._databaseService);
 
-  Future<List<PostDbDto>> getAllPosts() async {
+  Future<List<PostDbDto>> getAllPosts(int page) async {
     final posts = await _databaseService.getAllPosts();
-    print(posts.toString());
     return posts;
   }
 
   Future<void> saveAllPosts(List<PostDbDto> posts) async {
-    posts.forEach((post) => _databaseService.savePost(post));
+    for (var post in posts) {
+      _databaseService.savePost(post);
+    }
+
   }
 }
