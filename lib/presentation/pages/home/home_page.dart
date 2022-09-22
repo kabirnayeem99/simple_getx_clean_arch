@@ -1,5 +1,6 @@
-import 'package:flutter/cupertino.dart';
+import 'package:bottom_bar/bottom_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svprogresshud/flutter_svprogresshud.dart';
 import 'package:get/get.dart';
 import 'package:unicons/unicons.dart';
 
@@ -9,39 +10,56 @@ import '../users/users_page.dart';
 class HomePage extends StatelessWidget {
   HomePage({Key? key}) : super(key: key);
 
-  final currentPage = 0.obs;
+  final _currentPage = 0.obs;
+  final _pageController = PageController();
 
-  static const List<BottomNavigationBarItem> _bottomNavBarItems = [
-    BottomNavigationBarItem(
-      icon: Icon(UniconsLine.newspaper),
-      label: "Posts",
+  static final List<BottomBarItem> _bottomNavBarItems = [
+    BottomBarItem(
+      icon: const Icon(UniconsLine.newspaper),
+      activeColor: Get.theme.primaryColor,
     ),
-    BottomNavigationBarItem(
-      icon: Icon(UniconsLine.users_alt),
-      label: "Users",
-    )
+    BottomBarItem(
+      icon: const Icon(UniconsLine.users_alt),
+      activeColor: Get.theme.primaryColor,
+    ),
   ];
 
-  static List<Widget> screens = [
+  static final List<Widget> _screens = [
     PostsPage(),
     UsersPage(),
   ];
 
   @override
   Widget build(BuildContext context) {
+    SVProgressHUD.setRingThickness(3.5);
+    SVProgressHUD.setForegroundColor(Get.theme.primaryColor);
+
     return Obx(
       () => Scaffold(
-        bottomNavigationBar: BottomNavigationBar(
-          onTap: (position) => currentPage.value = position,
-          elevation: 0.0,
-          selectedFontSize: 14.0,
-          unselectedFontSize: 14.0,
-          currentIndex: currentPage.value,
-          items: _bottomNavBarItems,
+        bottomNavigationBar: Padding(
+          padding: EdgeInsets.only(
+              left: Get.mediaQuery.size.width / 4.5,
+              right: Get.mediaQuery.size.width / 4.5,
+              top: 8.0),
+          child: BottomBar(
+            padding: const EdgeInsets.only(bottom: 24.0),
+            border: const StadiumBorder(),
+            onTap: (index) {
+              _currentPage.value = index;
+              _pageController.animateToPage(
+                index,
+                duration: 300.milliseconds,
+                curve: Curves.easeInOut,
+              );
+            },
+            items: _bottomNavBarItems,
+            selectedIndex: _currentPage.value,
+          ),
         ),
-        body: AnimatedContainer(
-          duration: 600.milliseconds,
-          child: screens[currentPage.value],
+        body: PageView(
+          onPageChanged: (index) => _currentPage.value = index,
+          controller: _pageController,
+          children: _screens,
         ),
       ),
     );

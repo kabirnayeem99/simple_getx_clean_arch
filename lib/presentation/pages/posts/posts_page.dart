@@ -36,6 +36,7 @@ class PostsPage extends StatelessWidget {
             ),
             body: Column(
               children: [
+                const SizedBox(height: 20),
                 const MakeAPostButton(),
                 Expanded(
                   child: Container(

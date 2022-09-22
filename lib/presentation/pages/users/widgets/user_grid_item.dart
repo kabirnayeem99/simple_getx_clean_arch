@@ -132,9 +132,7 @@ class UserGridItem extends StatelessWidget {
                         ? CupertinoIcons.person_crop_circle_fill_badge_checkmark
                         : CupertinoIcons.person_add,
                     size: 28.0,
-                    color: user.isFollowing
-                        ? Get.theme.primaryColorLight
-                        : Colors.white,
+                    color: user.isFollowing ? Colors.greenAccent : Colors.white,
                   ),
                 ),
               ),
