@@ -18,7 +18,13 @@ class MockImageDataSource {
     "https://talktoislam.com/?qa=blob&qa_blobid=10378985844267793926",
     "https://1.bp.blogspot.com/_M_5Pmk5eXGo/R8NHYMxfFjI/AAAAAAAAARc/cucZlIf-bko/s400/muslimbeard.jpg",
     "https://t1.thpservices.com/fotos/thum400/022/803/ibr-1822475.jpg",
-    "https://i1.wp.com/becomingthealphamuslim.com/wp-content/uploads/2017/02/beard-with-shaved-head.png?resize=300%2C300"
+    "https://i.pinimg.com/originals/f3/6d/78/f36d7869856bdccc1831fed08bea7838.jpg",
+    "https://c1.staticflickr.com/9/8210/8160518349_b2873130f1_b.jpg",
+    "https://i.pinimg.com/originals/70/f6/b5/70f6b54dab3e8cb998dca4af2306c1ac.jpg",
+    "https://i1.wp.com/becomingthealphamuslim.com/wp-content/uploads/2017/02/beard-with-shaved-head.png?resize=300%2C300",
+    "https://images.freeimages.com/images/large-previews/f68/old-muslim-man-1555455.jpg",
+    "https://i.pinimg.com/736x/0a/49/e0/0a49e002b30607efe0fdbbfbcd4e1c28--skull-central.jpg",
+    "https://c1.staticflickr.com/9/8466/8127163491_4145934f34_b.jpg",
   ];
 
   static String mockImage() {

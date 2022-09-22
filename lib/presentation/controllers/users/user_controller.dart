@@ -35,6 +35,7 @@ class UserController extends GetxController {
           ? existingUsers.add(user.copyWith(isFollowing: !user.isFollowing))
           : existingUsers.add(user);
     }
+
     uiState.update((state) => state?.users = existingUsers);
     _unloading();
   }
